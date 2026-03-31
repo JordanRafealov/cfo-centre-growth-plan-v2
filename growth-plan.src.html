@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Growth Engine - CFO Centre NZ - Dopamine Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0c0c14;
+  --card: #16162a;
+  --card-border: rgba(255,255,255,0.08);
+  --accent: #7c3aed;
+  --accent-glow: rgba(124, 58, 237, 0.15);
+  --green: #22c55e;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --blue: #3b82f6;
+  --cyan: #06b6d4;
+  --text: #f0f0f5;
+  --text-secondary: #a0a0b8;
+  --radius: 16px;
+}
+[data-theme="light"] {
+  --bg: #f4f4fb;
+  --card: #ffffff;
+  --card-border: rgba(0,0,0,0.09);
+  --accent: #7c3aed;
+  --accent-glow: rgba(124,58,237,0.08);
+  --text: #0d0d1a;
+  --text-secondary: #5a5a78;
+}
+[data-theme="light"] .nav-bar { background: rgba(244,244,251,0.92); border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .nav-dot { background: rgba(0,0,0,0.15); }
+[data-theme="light"] .slide { background: var(--bg); }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.deck { width: 100%; height: 100%; position: relative; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms ease, transform 500ms ease;
+  transform: translateY(12px);
+  overflow-y: auto;
+  padding: 50px 40px 80px;
+}
+.slide::before,
+.slide::after {
+  content: '';
+  flex: 1 1 0px;
+}
+.slide.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.slide::-webkit-scrollbar { width: 6px; }
+.slide::-webkit-scrollbar-track { background: transparent; }
+.slide::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.3); border-radius: 3px; }
+
+.slide-inner {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Inter', sans-serif; font-weight: 700; line-height: 1.15; }
+h1 { font-size: 52px; letter-spacing: -0.02em; margin-bottom: 16px; text-wrap: balance; }
+h2 { font-size: 44px; letter-spacing: -0.02em; margin-bottom: 16px; text-align: center; }
+h3 { font-size: 28px; margin-bottom: 12px; }
+h4 { font-size: 22px; margin-bottom: 8px; font-weight: 600; }
+.slide-icon { display: block; text-align: center; font-size: 40px; margin-bottom: 12px; line-height: 1; }
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.subtitle { font-size: 22px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 24px; font-weight: 400; text-align: center; }
+
+.playfair-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--accent); }
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.text-amber { color: var(--amber); }
+.text-blue { color: var(--blue); }
+.text-cyan { color: var(--cyan); }
+strong { font-weight: 700; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+}
+.card:hover {
+  border-color: rgba(124,58,237,0.2);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 0 15px rgba(124,58,237,0.06);
+  transform: translateY(-2px);
+}
+.card-sm { padding: 24px; }
+.card-violet { border-color: rgba(124,58,237,0.35); background: rgba(124,58,237,0.06); position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(124,58,237,0.06); }
+.card-green { border-color: rgba(34,197,94,0.25); background: rgba(34,197,94,0.05); box-shadow: 0 0 15px rgba(34,197,94,0.04); }
+.card-green:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 0 20px rgba(34,197,94,0.08); }
+.card-amber { border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.05); }
+.card-blue { border-color: rgba(59,130,246,0.25); background: rgba(59,130,246,0.05); }
+.card-red { border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.05); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: stretch; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; align-items: stretch; }
+
+.bullet-list { list-style: none; padding: 0; }
+.bullet-list li {
+  padding: 10px 0 10px 28px;
+  position: relative;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.bullet-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 18px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.bullet-list.green li::before { background: var(--green); }
+.bullet-list.red li::before { background: var(--red); }
+
+.check-list { list-style: none; padding: 0; text-align: left; }
+.check-list li { padding: 6px 0; font-size: 15px; }
+.check-list li::before { content: '\2705\00a0\00a0'; }
+.x-list { list-style: none; padding: 0; }
+.x-list li {
+  padding: 8px 0 8px 32px;
+  position: relative;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.x-list li::before {
+  content: '\2717';
+  position: absolute;
+  left: 0; top: 8px;
+  color: var(--red);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.proof-img {
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  display: block;
+  width: 100%;
+}
+
+.stat { text-align: center; padding: 28px 20px; }
+.stat .num { font-size: 48px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 8px; }
+.stat .label { font-size: 16px; color: var(--text-secondary); line-height: 1.4; }
+
+.flow-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  text-align: center;
+}
+.flow-arrow { display: flex; align-items: center; color: var(--accent); font-size: 16px; flex-shrink: 0; }
+.flow-box {
+  background: rgba(124,58,237,0.1);
+  border-radius: 8px;
+  padding: 12px 14px;
+  flex: 1 1 0;
+  min-width: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flow-box-green {
+  background: rgba(34,197,94,0.1);
+  border-radius: 8px;
+  padding: 12px 14px;
+  flex: 1 1 0;
+  min-width: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flow-box-amber {
+  background: rgba(245,158,11,0.1);
+  border-radius: 8px;
+  padding: 12px 14px;
+  flex: 1 1 0;
+  min-width: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(34,197,94,0.08) 100%);
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: var(--radius);
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(124,58,237,0.08);
+  animation: accentPulse 4s ease-in-out infinite;
+}
+
+.quote-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+}
+.quote-card p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.gap-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px 0;
+}
+.gap-box {
+  text-align: center;
+  padding: 28px 32px;
+  border-radius: var(--radius);
+  flex: 1 1 0;
+  min-width: 0;
+}
+.gap-arrow {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 17px;
+}
+.value-row:last-child { border-bottom: none; }
+.value-amount { font-weight: 700; color: var(--text-secondary); }
+.strikethrough { text-decoration: line-through; opacity: 0.5; }
+
+.pricing-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  text-align: center;
+  position: relative;
+}
+.pricing-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 40px rgba(124,58,237,0.12);
+}
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.price-big { font-size: 52px; font-weight: 700; margin: 16px 0 8px; }
+.price-strike { font-size: 24px; color: var(--text-secondary); text-decoration: line-through; }
+
+.price-featured {
+  border: 2px solid rgba(124,58,237,0.4);
+  background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(34,197,94,0.04) 100%);
+  position: relative;
+  overflow: visible;
+}
+
+.roadmap-step {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: relative;
+  transition: all 300ms ease;
+}
+.roadmap-step:hover {
+  border-color: rgba(124,58,237,0.3);
+  box-shadow: 0 0 20px rgba(124,58,237,0.08);
+}
+.roadmap-month {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.roadmap-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.metric-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.agent-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: all 300ms ease;
+}
+.agent-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(124,58,237,0.15);
+  transform: translateY(-2px);
+}
+.agent-icon { font-size: 32px; margin-bottom: 8px; animation: emojiBob 3s ease-in-out infinite; }
+.agent-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.agent-role { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.tool-thumb {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 300ms ease;
+}
+.tool-thumb:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(124,58,237,0.15);
+  transform: translateY(-2px);
+}
+.tool-thumb img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+.tool-thumb-info {
+  padding: 12px 14px;
+}
+.tool-thumb-info h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.tool-thumb-info p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+.screenshot-hero {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+  display: block;
+  margin-bottom: 16px;
+}
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.screenshot-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.screenshot-grid img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  display: block;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.screenshot-grid img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 32px rgba(124,58,237,0.15);
+}
+.screenshot-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.stack-details {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.stack-details summary {
+  padding: 18px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 17px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+.stack-details summary::-webkit-details-marker { display: none; }
+.stack-details summary::before {
+  content: '\25B6';
+  font-size: 11px;
+  color: var(--accent);
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+}
+.stack-details[open] summary::before { transform: rotate(90deg); }
+.stack-details .detail-body {
+  padding: 0 24px 20px 48px;
+}
+.stack-details .detail-body li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.tier-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+.tier-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 4px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.nav-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(12,12,20,0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  z-index: 100;
+}
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: all 200ms ease;
+  flex-shrink: 0;
+}
+.nav-dot.active { background: var(--accent); transform: scale(1.3); }
+.nav-counter {
+  position: fixed;
+  bottom: 54px;
+  right: 40px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  z-index: 100;
+  font-variant-numeric: tabular-nums;
+}
+
+.mb-4 { margin-bottom: 4px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-28 { margin-bottom: 28px; }
+.mb-32 { margin-bottom: 32px; }
+.mb-40 { margin-bottom: 40px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.small { font-size: 14px; }
+.muted { color: var(--text-secondary); opacity: 0.6; }
+
+.agent-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
+
+@media (max-width: 1024px) {
+  .slide { padding: 40px 24px 80px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 36px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  .agent-grid { grid-template-columns: repeat(3, 1fr); }
+  .tool-grid { grid-template-columns: repeat(2, 1fr); }
+  .screenshot-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+  .flow-row { flex-wrap: wrap; }
+  .gap-visual { flex-direction: column; gap: 12px; }
+  .gap-arrow { transform: rotate(90deg); }
+}
+@media (max-width: 640px) {
+  .slide { padding: 24px 16px 72px; }
+  h1 { font-size: 30px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 22px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 16px; }
+  .agent-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .tool-grid { grid-template-columns: 1fr; }
+  .screenshot-grid, .screenshot-grid.cols-3 { grid-template-columns: 1fr; }
+  .tool-thumb img { height: 120px; }
+  .card { padding: 20px; }
+  .card-sm { padding: 16px; }
+  .stat .num { font-size: 36px; }
+  .price-big { font-size: 40px; }
+  .flow-row { gap: 4px; }
+  .flow-box, .flow-box-green, .flow-box-amber { padding: 8px 6px; font-size: 11px; }
+  .quote-card { padding: 18px 20px; }
+  .quote-card p { font-size: 17px; }
+  .nav-bar { height: 44px; gap: 5px; }
+  .nav-dot { width: 6px; height: 6px; }
+}
+
+/* === ANIMATION SYSTEM === */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { opacity: 0; transform: translateY(18px); }
+.slide.active .fade-up { animation: fadeUp 500ms ease both; }
+.slide.active .fade-up:nth-child(1) { animation-delay: 0ms; }
+.slide.active .fade-up:nth-child(2) { animation-delay: 80ms; }
+.slide.active .fade-up:nth-child(3) { animation-delay: 160ms; }
+.slide.active .fade-up:nth-child(4) { animation-delay: 240ms; }
+.slide.active .fade-up:nth-child(5) { animation-delay: 320ms; }
+.slide.active .fade-up:nth-child(6) { animation-delay: 400ms; }
+.slide.active .fade-up:nth-child(7) { animation-delay: 480ms; }
+.slide.active .fade-up:nth-child(8) { animation-delay: 560ms; }
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+@keyframes statGlow {
+  0%, 100% { text-shadow: 0 0 8px currentColor; }
+  50%      { text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+}
+@keyframes accentPulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(124,58,237,0.08), 0 0 60px rgba(124,58,237,0.04); }
+  50%      { box-shadow: 0 0 40px rgba(124,58,237,0.15), 0 0 80px rgba(124,58,237,0.08); }
+}
+@keyframes headlineNeon {
+  0%, 100% { text-shadow: 0 0 10px rgba(124,58,237,0.3), 0 0 30px rgba(124,58,237,0.1); }
+  50%      { text-shadow: 0 0 15px rgba(124,58,237,0.5), 0 0 40px rgba(124,58,237,0.2), 0 0 80px rgba(124,58,237,0.08); }
+}
+h2 .text-accent { animation: headlineNeon 4s ease-in-out infinite; }
+
+.card-violet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(124,58,237,0.07) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  50%  { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.card-violet:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 0 25px rgba(124,58,237,0.12); }
+
+@property --shine-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes shineRotate {
+  from { --shine-angle: 0deg; }
+  to   { --shine-angle: 360deg; }
+}
+.shine-border { position: relative; overflow: visible; }
+.shine-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius) + 2px);
+  background: conic-gradient(from var(--shine-angle), transparent 0%, rgba(124,58,237,0.6) 10%, transparent 20%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+  animation: shineRotate 6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes emojiBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+.agent-card:nth-child(2) .agent-icon { animation-delay: 0.3s; }
+.agent-card:nth-child(3) .agent-icon { animation-delay: 0.6s; }
+.agent-card:nth-child(4) .agent-icon { animation-delay: 0.9s; }
+.agent-card:nth-child(5) .agent-icon { animation-delay: 1.2s; }
+
+@keyframes guaranteeGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(34,197,94,0.1); }
+  50%      { box-shadow: 0 0 35px rgba(34,197,94,0.2), 0 0 70px rgba(34,197,94,0.06); }
+}
+.guarantee-glow { animation: guaranteeGlow 4s ease-in-out infinite; }
+
+.value-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 16px;
+}
+.value-line:last-child { border-bottom: none; }
+
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.faq-item summary {
+  padding: 18px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 17px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before {
+  content: '\25B6';
+  font-size: 11px;
+  color: var(--accent);
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+}
+.faq-item[open] summary::before { transform: rotate(90deg); }
+.faq-body {
+  padding: 0 24px 20px 48px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.placeholder-img {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  border: 2px dashed rgba(124,58,237,0.4);
+  background: rgba(124,58,237,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITLE / HOOK -->
+<!-- ============================================================ -->
+<div class="slide active" data-slide="1">
+<div class="slide-inner text-center">
+  <img src="assets/dd-logo-white.png" alt="Dopamine Digital" style="width:48px; margin:0 auto 24px; display:block; opacity:0.7;">
+  <p class="eyebrow fade-up mb-24" style="font-size:15px; letter-spacing:0.2em;">DOPAMINE DIGITAL</p>
+  <h1 class="fade-up" style="font-size:50px; margin-bottom:20px;">How We Generate <span class="text-accent">$80,000/Month</span> in New Pipeline for CFO Centre</h1>
+  <p class="subtitle fade-up" style="max-width:740px; margin:0 auto 40px;">Without hiring SDRs, without running ads, and without burning your brand with generic cold email.</p>
+  <div class="fade-up" style="display:flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-bottom:40px;">
+    <span class="metric-pill"><span class="text-accent" style="font-size:24px; font-weight:800;">10+</span> Qualified Conversations</span>
+    <span class="metric-pill"><span class="text-green" style="font-size:24px; font-weight:800;">45</span> Day Install</span>
+    <span class="metric-pill"><span class="text-amber" style="font-size:24px; font-weight:800;">100%</span> You Own Everything</span>
+  </div>
+  <p class="fade-up playfair-quote" style="max-width:550px; margin:0 auto 40px; font-size:20px;">Prepared for David King & Laura Mills</p>
+  <p class="fade-up small muted">March 2026</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: WHAT WE LEARNED -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="2">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--text-secondary);">What We Heard</p>
+  <h2 class="fade-up mb-8">What We Learned About <span class="text-accent">CFO Centre NZ</span></h2>
+  <p class="subtitle fade-up mb-28">From our conversation on March 24</p>
+
+  <div class="grid-4 fade-up mb-28">
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num" style="font-size:36px;">$1M</p>
+      <p class="label">NZD Revenue Last Year</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-red" style="font-size:36px;">6</p>
+      <p class="label">Clients Won (vs 20 in AU)</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-amber" style="font-size:36px;">3-4</p>
+      <p class="label">Leads Per Month</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-green" style="font-size:36px;">1 in 3</p>
+      <p class="label">Close Rate (Face-to-Face)</p>
+    </div>
+  </div>
+
+  <div class="grid-2 fade-up">
+    <div class="card card-sm" style="border-left:4px solid var(--red);">
+      <h4 class="text-red mb-12">&#x274C; What is Not Working</h4>
+      <ul class="x-list">
+        <li>Email channel collapsed - Microsoft clamped down</li>
+        <li>No referral network built in NZ</li>
+        <li>CFOs frustrated and waiting for clients</li>
+        <li>Reliant on central marketing alone</li>
+        <li>Only 6 clients won vs 20 in comparable AU regions</li>
+      </ul>
+    </div>
+    <div class="card card-sm" style="border-left:4px solid var(--green);">
+      <h4 class="text-green mb-12">&#x2705; What is Working</h4>
+      <ul class="bullet-list green">
+        <li>Strong 1-in-3 close rate when you get the meeting</li>
+        <li>$80K/year average client value, 2-year retention</li>
+        <li>Best AU regions thrive on referral partnerships</li>
+        <li>60 CFOs trained on AI tools internally</li>
+        <li>Global brand, 25-year track record, 800 CFOs worldwide</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: THREE GAPS -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="3">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--red);">The Problem</p>
+  <h2 class="fade-up mb-8">Three Gaps Holding <span class="text-red">NZ Back</span></h2>
+  <p class="subtitle fade-up mb-28">Structural gaps surfaced across the podcast and strategy call</p>
+
+  <div class="grid-3 fade-up mb-24" style="align-items:stretch;">
+    <div class="tier-card" style="border-top:4px solid var(--red);">
+      <p style="font-size:32px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite;">&#x1F393;</p>
+      <h4 class="mb-8">Market Education</h4>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6; flex:1;">80% of NZ business owners do not know what a fractional CFO is. No proactive engine reaching the unaware. Your digital marketing only reaches people already searching.</p>
+      <div class="quote-card mt-12" style="padding:16px 20px;">
+        <p style="font-size:16px;">"If I could wave a wand and the market knew what a CFO is, I'd be a happy man."</p>
+        <p style="font-size:12px; color:var(--text-secondary); margin-top:8px; font-style:normal; font-family:'Inter',sans-serif;">- David King</p>
+      </div>
+    </div>
+    <div class="tier-card" style="border-top:4px solid var(--amber);">
+      <p style="font-size:32px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite; animation-delay:0.3s;">&#x1F91D;</p>
+      <h4 class="mb-8">No Referral Engine</h4>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6; flex:1;">The distribution network that powers your best AU regions has never been built in NZ. Referral partnerships are your most successful channel globally, but NZ has almost none.</p>
+      <div class="quote-card mt-12" style="padding:16px 20px;">
+        <p style="font-size:16px;">"The referral network stuff hasn't come naturally. So it's been very reliant on central marketing."</p>
+        <p style="font-size:12px; color:var(--text-secondary); margin-top:8px; font-style:normal; font-family:'Inter',sans-serif;">- David King</p>
+      </div>
+    </div>
+    <div class="tier-card" style="border-top:4px solid var(--accent);">
+      <p style="font-size:32px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite; animation-delay:0.6s;">&#x1F4C9;</p>
+      <h4 class="mb-8">No Repeatable Pipeline</h4>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6; flex:1;">No predictable function to reach SME owners. Email collapsed. 3-4 leads per month is survival mode, not a system.</p>
+      <div class="quote-card mt-12" style="padding:16px 20px;">
+        <p style="font-size:16px;">"Email campaigns have really died a huge death. We've really had to step up on other channels."</p>
+        <p style="font-size:12px; color:var(--text-secondary); margin-top:8px; font-style:normal; font-family:'Inter',sans-serif;">- David King</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: COST OF INACTION -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="4">
+<div class="slide-inner text-center">
+  <p class="eyebrow fade-up" style="color:var(--red);">Why We Are Here</p>
+  <h2 class="fade-up mb-32">The Cost of <span class="text-red">Not Fixing This</span></h2>
+
+  <div class="glow-card fade-up mb-32" style="padding:48px 28px;">
+    <p style="font-size:14px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">Every Month Without a Pipeline</p>
+    <p style="font-size:72px; font-weight:700; color:var(--red); line-height:1; margin-bottom:12px;">$80,000</p>
+    <p style="font-size:22px; color:var(--text-secondary);">NZD in lost opportunity</p>
+  </div>
+
+  <div class="grid-4 fade-up mb-24">
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-red" style="font-size:32px;">$240K</p>
+      <p class="label">Lost Per Quarter</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-red" style="font-size:32px;">$960K</p>
+      <p class="label">Lost Per Year</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-amber" style="font-size:32px;">6+</p>
+      <p class="label">Missed Clients Per Year</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-green" style="font-size:32px;">$160K</p>
+      <p class="label">Lifetime Value Per Client</p>
+    </div>
+  </div>
+
+  <p class="fade-up" style="font-size:17px; color:var(--text-secondary); max-width:700px; margin:0 auto;">Every month without a pipeline is another CFO without a full book. Every quarter is another $240,000 that walks away and never comes back.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: OLD WAY VS NEW WAY -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="5">
+<div class="slide-inner">
+  <p class="eyebrow fade-up">The Missing Piece</p>
+  <h2 class="fade-up mb-8">What Was Missing <span class="text-accent">All Along</span></h2>
+  <p class="subtitle fade-up mb-32">Your email channel did not fail because email does not work. It failed because the approach was wrong. Here is what changed.</p>
+
+  <div class="gap-visual fade-up mb-24">
+    <div class="gap-box card-red" style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2);">
+      <p style="font-size:12px; font-weight:700; color:var(--red); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.1em;">The Old Way</p>
+      <p style="font-size:20px; font-weight:700; margin-bottom:16px;">Spray and Pray</p>
+      <ul style="font-size:15px; color:var(--text-secondary); text-align:left; line-height:1.8; list-style:none; padding:0;">
+        <li>&#x2717; Scrape a lead list</li>
+        <li>&#x2717; Blast the same generic pitch to everyone</li>
+        <li>&#x2717; Hope 0.5% are looking right now</li>
+        <li>&#x2717; One message, one channel</li>
+        <li>&#x2717; Burn the list, start over</li>
+      </ul>
+    </div>
+    <div class="gap-arrow">
+      <span style="font-size:32px;">&#x2192;</span>
+      <span style="font-size:11px; font-weight:700; letter-spacing:0.1em;">THE SHIFT</span>
+    </div>
+    <div class="gap-box card-green" style="background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.2);">
+      <p style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.1em;">The New Way</p>
+      <p style="font-size:20px; font-weight:700; margin-bottom:16px;">Intent-Based Warm Outreach</p>
+      <ul style="font-size:15px; color:var(--text-secondary); text-align:left; line-height:1.8; list-style:none; padding:0;">
+        <li>&#x2713; Identify buying signals before reaching out</li>
+        <li>&#x2713; Three messages for three awareness levels</li>
+        <li>&#x2713; Educate through conversation, not pitching</li>
+        <li>&#x2713; Signal-based warm outreach</li>
+        <li>&#x2713; Multi-channel: LinkedIn + email + content</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-violet card-sm fade-up text-center">
+    <p style="font-size:17px;">The only thing missing was signal-based intent targeting. Everything else was already in place.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: SOLUTION SUMMARY -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="6">
+<div class="slide-inner text-center">
+  <p class="eyebrow fade-up">The Solution</p>
+  <h2 class="fade-up mb-8">The Intent-Based <span class="text-accent">AI Growth Engine</span></h2>
+  <p class="subtitle fade-up mb-28" style="font-size:22px; max-width:740px; margin-left:auto; margin-right:auto;">We install a system that puts the right message in front of the right person at the right time. It books qualified sales conversations, builds your referral network, and educates the market. All in one engine.</p>
+
+  <div class="flow-row fade-up mb-28">
+    <div class="flow-box">Signal Detection</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box">Lead Scoring</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box-amber">Awareness Routing</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box">Three Campaigns</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box-green">Qualified Conversations</div>
+  </div>
+
+  <div class="grid-3 fade-up mb-24" style="align-items:stretch;">
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-left:4px solid var(--accent);">
+      <p style="font-size:36px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite;">&#x1F3AF;</p>
+      <h4 class="mb-8" style="font-size:19px;">Pillar 1: Offers & Outreach</h4>
+      <ul class="bullet-list" style="font-size:14px; flex:1;">
+        <li>Podcast invites for unaware prospects</li>
+        <li>Private workshops for problem-aware leads</li>
+        <li>VIP Dream 100 for hottest targets</li>
+        <li>Referral partner outreach built in</li>
+      </ul>
+    </div>
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-left:4px solid var(--green);">
+      <p style="font-size:36px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite; animation-delay:0.3s;">&#x2699;&#xFE0F;</p>
+      <h4 class="mb-8" style="font-size:19px;">Pillar 2: The Growth Engine</h4>
+      <ul class="bullet-list" style="font-size:14px; flex:1;">
+        <li>Signal-based lead sourcing (8 categories)</li>
+        <li>LinkedIn + email infrastructure</li>
+        <li>AI reply agents (60-second response)</li>
+        <li>10,000+ qualified leads built</li>
+      </ul>
+    </div>
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-left:4px solid var(--amber);">
+      <p style="font-size:36px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite; animation-delay:0.6s;">&#x1F4CA;</p>
+      <h4 class="mb-8" style="font-size:19px;">Pillar 3: Pipeline Management</h4>
+      <ul class="bullet-list" style="font-size:14px; flex:1;">
+        <li>Every call booked and managed</li>
+        <li>Podcast guest research dossiers</li>
+        <li>Real-time pipeline dashboard</li>
+        <li>Nothing falls between the cracks</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: PILLAR 1 EXPANDED -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="7">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--accent);">&#x1F3AF; Pillar 1</p>
+  <h2 class="fade-up mb-8">Three Offers for <span class="text-accent">Three Audiences</span></h2>
+  <p class="subtitle fade-up mb-28">Most outreach fails because it sends the same message to everyone. We match the approach to where each person is in their awareness journey.</p>
+
+  <details class="stack-details fade-up" open>
+    <summary>&#x1F3A4; Podcast Invite <span class="tier-badge" style="background:rgba(124,58,237,0.12); color:var(--accent); margin-left:auto;">80% of Volume</span></summary>
+    <div class="detail-body">
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.7;">For SME owners who do not know what a fractional CFO is. Richard or David hosts a conversation. The guest talks about their business challenges. By the end, they understand what a CFO does - through their own story, not a pitch. Every episode produces 3-5 clips for LinkedIn. Market education at scale.</p>
+    </div>
+  </details>
+
+  <details class="stack-details fade-up">
+    <summary>&#x1F3EB; Private Workshop <span class="tier-badge" style="background:rgba(245,158,11,0.12); color:var(--amber); margin-left:auto;">15% of Volume</span></summary>
+    <div class="detail-body">
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.7;">For problem-aware SME owners and referral partners showing buying signals. A CFO walks into their business and runs a customized session for their leadership team. Shows what financial leadership looks like using their own numbers. A free sample of the actual service. Also works for referral partners - delivered to the accounting firm or law firm's team. They experience CFO Centre's expertise and leave thinking "I have 3 clients who need this."</p>
+    </div>
+  </details>
+
+  <details class="stack-details fade-up">
+    <summary>&#x1F48E; VIP Dream 100 <span class="tier-badge" style="background:rgba(34,197,94,0.12); color:var(--green); margin-left:auto;">5% of Volume</span></summary>
+    <div class="detail-body">
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.7;">For the highest-value targets showing multiple buying signals. Manual, personalized outreach. Research dossier built for each target. Physical packages sent to their office. Multi-channel: LinkedIn + email + direct. Top 20 referral partner targets in Auckland (managing partners at the largest accounting and law firms). These are the leads that, if converted, transform the NZ business overnight.</p>
+    </div>
+  </details>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: PILLAR 2 EXPANDED -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="8">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--green);">&#x2699;&#xFE0F; Pillar 2</p>
+  <h2 class="fade-up mb-8">The <span class="text-accent">Growth Engine</span></h2>
+  <p class="subtitle fade-up mb-24">Signal-based targeting across LinkedIn and email. Here is how we find the right people and what the engine looks like under the hood.</p>
+
+  <h4 class="fade-up mb-12 text-center" style="font-size:16px; color:var(--text-secondary);">How We Find the Right People</h4>
+  <div class="flow-row fade-up mb-28">
+    <div class="flow-box">Sales Nav + Signals</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box">Enrich + Verify</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box-amber">AI Signal Detection</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box">Score + Route</div>
+    <span class="flow-arrow">&#x2192;</span>
+    <div class="flow-box-green">3 Campaigns</div>
+  </div>
+
+  <h4 class="fade-up mb-12 text-center" style="font-size:16px; color:var(--text-secondary);">&#x1F50D; 8 Signal Categories</h4>
+  <div class="fade-up mb-24" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--green);">
+      <p style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:6px;">&#x1F4B0; 1. FUNDING & INVESTMENT</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">NZ company raised capital. Complexity spiked. They have budget.</p>
+    </div>
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--green);">
+      <p style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:6px;">&#x1F454; 2. HIRING & TEAM CHANGES</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Posting for CFO = hot. Posting for bookkeeper = warm.</p>
+    </div>
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--green);">
+      <p style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:6px;">&#x1F50D; 3. COMPETITOR ACTIVITY</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Engaging with fractional CFO content on LinkedIn.</p>
+    </div>
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--amber);">
+      <p style="font-size:12px; font-weight:700; color:var(--amber); margin-bottom:6px;">&#x1F6E0;&#xFE0F; 4. TECH STACK GAPS</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Using Xero with no FP&A layer. Outgrown their tools.</p>
+    </div>
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--amber);">
+      <p style="font-size:12px; font-weight:700; color:var(--amber); margin-bottom:6px;">&#x1F624; 5. PAIN & FRUSTRATION</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Founder posting about cash flow or margin problems.</p>
+    </div>
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--amber);">
+      <p style="font-size:12px; font-weight:700; color:var(--amber); margin-bottom:6px;">&#x1F4CB; 6. REGULATORY PRESSURE</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">NZ tax reform or compliance changes in their sector.</p>
+    </div>
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--accent);">
+      <p style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:6px;">&#x1F4AC; 7. CONTENT ENGAGEMENT</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Active on LinkedIn but no finance-specific engagement.</p>
+    </div>
+    <div class="card card-sm" style="padding:16px; border-left:3px solid var(--green);">
+      <p style="font-size:12px; font-weight:700; color:var(--green); margin-bottom:6px;">&#x1F47B; 8. MISSING INFRASTRUCTURE</p>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">$10M+ revenue, no finance director on their team page.</p>
+    </div>
+  </div>
+
+  <h4 class="fade-up mb-12 text-center" style="font-size:16px; color:var(--text-secondary);">Under the Hood</h4>
+  <img src="assets/le-overview.png" alt="Lead Engine - 9-Step Pipeline" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up mb-24">Lead Engine - 9-Step Pipeline</p>
+
+  <div class="screenshot-grid fade-up mb-24">
+    <div>
+      <img src="assets/le-pipeline.png" alt="Scored Lead Pipeline">
+      <p class="screenshot-label">Scored Lead Pipeline</p>
+    </div>
+    <div>
+      <img src="assets/le-leads.png" alt="Enriched Lead Data">
+      <p class="screenshot-label">Enriched Lead Data</p>
+    </div>
+  </div>
+
+  <img src="assets/instant_reply_flow.png" alt="AI Reply Agents - 60 Second Response Time" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up mb-12">AI Reply Agents - 60 Second Response Time</p>
+  <p class="fade-up text-center" style="font-size:15px; color:var(--text-secondary); max-width:700px; margin:0 auto;">When a lead replies, AI classifies the intent, drafts a personalized response, and books the call automatically. Positive replies get booked. Questions get answered. Opt-outs get removed. All within 60 seconds.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: PILLAR 3 EXPANDED -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="9">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--amber);">&#x1F4CA; Pillar 3</p>
+  <h2 class="fade-up mb-8">Pipeline <span class="text-accent">Management</span></h2>
+  <p class="subtitle fade-up mb-28">We manage the entire pipeline end-to-end. You show up to meetings. We handle everything around them.</p>
+
+  <div class="grid-3 fade-up mb-28" style="align-items:stretch;">
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-top:3px solid var(--accent);">
+      <p style="font-size:32px; margin-bottom:12px;">&#x1F52C;</p>
+      <h4 class="mb-8">Research & Prep</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; flex:1;">Every podcast guest gets a deeply researched dossier before the conversation. Every workshop is customized to the specific business. Every VIP target gets a personalized briefing with talking points.</p>
+    </div>
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-top:3px solid var(--blue);">
+      <p style="font-size:32px; margin-bottom:12px;">&#x1F4C8;</p>
+      <h4 class="mb-8">Pipeline Dashboard</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; flex:1;">Real-time view of every conversation, every meeting booked, every deal in progress. One dashboard. Nothing falls between the cracks. Weekly 30-minute ops call to review performance.</p>
+    </div>
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-top:3px solid var(--green);">
+      <p style="font-size:32px; margin-bottom:12px;">&#x1F4C5;</p>
+      <h4 class="mb-8">Booking & Follow-up</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; flex:1;">We book the calls, send the reminders, handle the follow-up sequences. Richard shows up to meetings prepared. The CFOs show up to workshops with customized content. We handle the rest.</p>
+    </div>
+  </div>
+
+  <h4 class="fade-up mb-12 text-center" style="font-size:16px; color:var(--text-secondary);">Under the Hood</h4>
+  <img src="assets/mc-home.png" alt="Mission Control Dashboard" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up mb-24">Mission Control Dashboard</p>
+
+  <div class="screenshot-grid fade-up">
+    <div>
+      <img src="assets/pc-overview.png" alt="Pipeline Overview">
+      <p class="screenshot-label">Pipeline Overview</p>
+    </div>
+    <div>
+      <img src="assets/pc-kanban.png" alt="Pipeline Kanban View">
+      <p class="screenshot-label">Pipeline Kanban View</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: TWO FREE BONUSES -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="10">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--green);">Included Free</p>
+  <h2 class="fade-up mb-8">Two Bonuses at <span class="text-green">No Extra Cost</span></h2>
+  <p class="subtitle fade-up mb-28">These are included with the growth engine at no additional charge.</p>
+
+  <div class="grid-2 fade-up mb-24" style="align-items:stretch;">
+    <div class="card card-violet card-sm" style="display:flex; flex-direction:column;">
+      <p style="font-size:40px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite;">&#x1F3AC;</p>
+      <h3 class="mb-8">Podcast Production</h3>
+      <h4 style="color:var(--green); font-size:18px; margin-bottom:12px;">Value: $2,500</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; flex:1;">We edit every podcast episode, create 3-5 short clips, add captions, and deliver authority-building content for LinkedIn. CFO Centre goes from zero content to 4-8 pieces per week. Richard and David become the visible faces of fractional CFO leadership in New Zealand.</p>
+    </div>
+    <div class="card card-green card-sm" style="display:flex; flex-direction:column;">
+      <p style="font-size:40px; margin-bottom:12px; animation: emojiBob 3s ease-in-out infinite; animation-delay:0.3s;">&#x1F4DA;</p>
+      <h3 class="mb-8">Internal Wiki & SOPs</h3>
+      <h4 style="color:var(--green); font-size:18px; margin-bottom:12px;">Value: $2,000</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; flex:1;">All sequences, scripts, templates, SOPs, and playbooks housed in your own Dopamine Digital wiki portal. Everything documented. Your team can run the entire system independently after day 45. You own it permanently.</p>
+    </div>
+  </div>
+
+  <img src="assets/wiki-homepage.png" alt="Your Private Client Wiki" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up">Your Private Client Wiki</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: TAM & MATH -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="11">
+<div class="slide-inner text-center">
+  <p class="eyebrow fade-up" style="color:var(--cyan);">The Numbers</p>
+  <h2 class="fade-up mb-8">How We Get to <span class="text-accent">10+ Conversations</span></h2>
+  <p class="subtitle fade-up mb-28">The NZ market is large. You only need a tiny fraction of it.</p>
+
+  <div class="grid-4 fade-up mb-24">
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-cyan" style="font-size:32px;">16,800</p>
+      <p class="label">NZ Businesses $5-100M Revenue</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-cyan" style="font-size:32px;">5,880</p>
+      <p class="label">In Auckland Alone</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-amber" style="font-size:32px;">5,778</p>
+      <p class="label">Accounting Firms (Referral Partners)</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-accent" style="font-size:32px;">2,076</p>
+      <p class="label">Insurance Brokerages</p>
+    </div>
+  </div>
+
+  <div class="card card-sm fade-up mb-24" style="padding:28px; text-align:left;">
+    <h4 class="mb-16 text-center" style="font-size:18px;">&#x1F9EE; The Math</h4>
+    <div class="value-row"><span>Prospects reached per month (LinkedIn + email)</span><span class="value-amount">1,500-2,000</span></div>
+    <div class="value-row"><span>Conservative positive reply rate (1-2%)</span><span class="value-amount">15-40 replies</span></div>
+    <div class="value-row"><span>Booking rate from positive replies (25-30%)</span><span class="value-amount">10+ conversations</span></div>
+    <div class="value-row"><span>At your close rate (1-in-3)</span><span class="value-amount">3+ new clients</span></div>
+    <div class="value-row"><span>3 clients x $80K/year</span><span class="value-amount text-green" style="color:var(--green);">$240,000 first-year revenue</span></div>
+  </div>
+
+  <div class="card card-violet card-sm fade-up mb-16" style="padding:20px;">
+    <p style="font-size:17px;"><strong>You need 6 more clients to double the NZ business. That is 0.04% of the addressable market.</strong> The market is not the constraint. The pipeline is.</p>
+  </div>
+
+  <div class="card card-green card-sm fade-up" style="padding:20px;">
+    <h4 class="mb-8" style="font-size:16px;">&#x2705; Evidence This Works</h4>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Signal-based growth engines consistently outperform traditional cold outreach. By targeting leads already showing buying intent, reply rates increase by 3-5x compared to generic campaigns. The three-offer model also captures prospects at every awareness stage, not just the 2-3% actively searching.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: RESULTS & CASE STUDIES -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="12">
+<div class="slide-inner">
+  <p class="eyebrow fade-up">Proof</p>
+  <h2 class="fade-up mb-8">Results From Growth Engines <span class="text-accent">We Have Built</span></h2>
+  <p class="subtitle fade-up mb-24">Real data from live systems. Here is what the engine produces.</p>
+
+  <div class="grid-3 fade-up mb-28">
+    <div class="card card-sm stat" style="padding:20px; border-top:3px solid var(--green);">
+      <p class="num text-green" style="font-size:36px;">30+</p>
+      <p class="label">Qualified Calls Booked</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px; border-top:3px solid var(--accent);">
+      <p class="num text-accent" style="font-size:36px;">$250K+</p>
+      <p class="label">Pipeline Revenue Generated</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px; border-top:3px solid var(--amber);">
+      <p class="num text-amber" style="font-size:36px;">3-5%</p>
+      <p class="label">Average Reply Rate</p>
+    </div>
+  </div>
+
+  <img src="assets/le-overview.png" alt="Lead Engine Overview" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up mb-24">Lead Engine Overview</p>
+
+  <img src="assets/le-pipeline.png" alt="Scored Lead Pipeline" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up mb-24">Scored Lead Pipeline</p>
+
+  <img src="assets/instantly_campaigns.png" alt="Campaign Performance Dashboard" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up mb-24">Campaign Performance Dashboard</p>
+
+  <img src="assets/mc-home.png" alt="Mission Control Dashboard" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up mb-24">Mission Control Dashboard</p>
+
+  <img src="assets/wiki-homepage.png" alt="Client Wiki Portal" class="screenshot-hero fade-up">
+  <p class="screenshot-label fade-up">Client Wiki Portal</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: ANCHOR HIGH - COST TO BUILD YOURSELF -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="13">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--red);">The Alternative</p>
+  <h2 class="fade-up mb-8">What It Costs to <span class="text-red">Build This Yourself</span></h2>
+  <p class="subtitle fade-up mb-28">This is not just scraping leads and sending emails. Here is what actually goes into building a growth engine from scratch.</p>
+
+  <div class="card card-sm fade-up mb-24" style="padding:28px;">
+    <div class="value-row"><span>&#x1F464; 2 x SDR hires (salary + management)</span><span class="value-amount text-red">$120,000-$200,000/yr</span></div>
+    <div class="value-row"><span>&#x1F4E7; Email infrastructure (25 domains, 50 inboxes, warm-up)</span><span class="value-amount text-red">$8,000-$12,000/yr</span></div>
+    <div class="value-row"><span>&#x1F50D; Lead sourcing tools (Sales Nav, Apollo, Prospeo, Exa, HeyReach)</span><span class="value-amount text-red">$15,000-$25,000/yr</span></div>
+    <div class="value-row"><span>&#x2705; Email verification and enrichment</span><span class="value-amount text-red">$3,000-$5,000/yr</span></div>
+    <div class="value-row"><span>&#x1F517; LinkedIn automation tooling</span><span class="value-amount text-red">$3,000-$5,000/yr</span></div>
+    <div class="value-row"><span>&#x1F916; AI agent development and maintenance</span><span class="value-amount text-red">$5,000-$10,000</span></div>
+    <div class="value-row"><span>&#x1F4CA; CRM and pipeline management</span><span class="value-amount text-red">$2,000-$5,000/yr</span></div>
+    <div class="value-row"><span>&#x1F3AC; Content production (podcast editing, clips)</span><span class="value-amount text-red">$12,000-$24,000/yr</span></div>
+    <div class="value-row"><span>&#x23F0; Your time to learn, build, and manage</span><span class="value-amount text-red">200-400 hours</span></div>
+  </div>
+
+  <div class="glow-card fade-up" style="padding:32px;">
+    <p style="font-size:14px; font-weight:700; color:var(--text-secondary); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.1em;">Total Cost to Build Yourself</p>
+    <p style="font-size:48px; font-weight:700; color:var(--red); margin-bottom:8px;">$170,000-$280,000+</p>
+    <p style="font-size:17px; color:var(--text-secondary);">Per year. Plus 3-6 months before you see your first qualified conversation.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: VALUE STACK -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="14">
+<div class="slide-inner">
+  <p class="eyebrow fade-up">What You Get</p>
+  <h2 class="fade-up mb-8">&#x1F4E6; The <span class="text-accent">Value Stack</span></h2>
+  <p class="subtitle fade-up mb-24">Every deliverable, grouped by pillar.</p>
+
+  <div class="card card-sm fade-up mb-12" style="padding:24px;">
+    <p style="font-size:13px; font-weight:700; color:var(--accent); margin-bottom:16px; text-transform:uppercase; letter-spacing:0.1em;">&#x1F3AF; Pillar 1: Offers & Outreach</p>
+    <div class="value-row"><span>ICP Strategy Session with Jordan (90 min)</span><span class="value-amount text-green">$1,500</span></div>
+    <div class="value-row"><span>3 Custom Offer Strategies (Podcast, Workshop, VIP)</span><span class="value-amount text-green">$3,000</span></div>
+    <div class="value-row"><span>Brand-Aligned Copy Templates (approved by Laura)</span><span class="value-amount text-green">$1,500</span></div>
+  </div>
+
+  <div class="card card-sm fade-up mb-12" style="padding:24px;">
+    <p style="font-size:13px; font-weight:700; color:var(--green); margin-bottom:16px; text-transform:uppercase; letter-spacing:0.1em;">&#x2699;&#xFE0F; Pillar 2: The Growth Engine</p>
+    <div class="value-row"><span>10,000+ Signal-Qualified NZ Leads</span><span class="value-amount text-green">$5,000</span></div>
+    <div class="value-row"><span>25 Sending Domains + 50 Inboxes</span><span class="value-amount text-green">$2,500</span></div>
+    <div class="value-row"><span>LinkedIn Outreach System (HeyReach)</span><span class="value-amount text-green">$2,000</span></div>
+    <div class="value-row"><span>AI Reply Agents on Both Channels</span><span class="value-amount text-green">$3,000</span></div>
+    <div class="value-row"><span>Signal-Based Scoring & Routing System</span><span class="value-amount text-green">$2,500</span></div>
+  </div>
+
+  <div class="card card-sm fade-up mb-12" style="padding:24px;">
+    <p style="font-size:13px; font-weight:700; color:var(--amber); margin-bottom:16px; text-transform:uppercase; letter-spacing:0.1em;">&#x1F4CA; Pillar 3: Pipeline Management</p>
+    <div class="value-row"><span>Pipeline Dashboard (Real-Time Tracking)</span><span class="value-amount text-green">$2,500</span></div>
+    <div class="value-row"><span>Weekly 30-Min Ops Calls (6 sessions)</span><span class="value-amount text-green">$1,500</span></div>
+    <div class="value-row"><span>Podcast Guest Research Dossiers</span><span class="value-amount text-green">$2,000</span></div>
+  </div>
+
+  <div class="card card-sm fade-up mb-12" style="padding:24px;">
+    <p style="font-size:13px; font-weight:700; color:var(--green); margin-bottom:16px; text-transform:uppercase; letter-spacing:0.1em;">&#x1F381; Free Bonuses</p>
+    <div class="value-row"><span>Podcast Editing & Content Production</span><span class="value-amount text-green">$2,500</span></div>
+    <div class="value-row"><span>Internal Wiki with All SOPs & Templates</span><span class="value-amount text-green">$2,000</span></div>
+  </div>
+
+  <div class="glow-card fade-up" style="padding:28px;">
+    <p style="font-size:14px; color:var(--text-secondary); margin-bottom:8px;">Total Value</p>
+    <p style="font-size:48px; font-weight:700; color:var(--green); margin-bottom:4px;">$31,500</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15: GUARANTEE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="15">
+<div class="slide-inner text-center">
+  <p class="eyebrow fade-up">Zero Risk</p>
+  <h2 class="fade-up mb-32">&#x1F6E1;&#xFE0F; The Guarantee</h2>
+
+  <div class="card card-green guarantee-glow fade-up mb-32" style="padding:48px 28px;">
+    <div style="display:flex; align-items:center; justify-content:center; gap:0;">
+      <div style="flex:1; text-align:center;">
+        <p style="font-size:52px; font-weight:700; color:var(--green); line-height:1;">10+</p>
+        <p style="font-size:17px; margin-top:12px; font-weight:600;">Qualified Sales Conversations</p>
+      </div>
+      <div style="width:1px; height:80px; background:rgba(255,255,255,0.15); flex-shrink:0;"></div>
+      <div style="flex:1; text-align:center;">
+        <p style="font-size:52px; font-weight:700; color:var(--green); line-height:1;">45</p>
+        <p style="font-size:17px; margin-top:12px; font-weight:600;">Days or We Work Free</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-sm fade-up mb-24" style="padding:32px; max-width:700px; margin:0 auto;">
+    <p style="font-size:19px; line-height:1.7;">We will generate 10 qualified sales conversations within 45 days of campaign launch. If we do not hit 10, we continue working at no additional cost for up to another 45 days or until we hit the target.</p>
+    <p style="font-size:19px; font-weight:700; margin-top:16px;">The risk is entirely on us.</p>
+  </div>
+
+  <p class="fade-up" style="font-size:14px; color:var(--text-secondary); max-width:640px; margin:0 auto;">"Qualified" means matches the ICP we agree on and takes a scheduled sales meeting with your team.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16: THE PRICE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="16">
+<div class="slide-inner text-center">
+  <p class="eyebrow fade-up">Investment</p>
+  <h2 class="fade-up mb-24">The Price</h2>
+
+  <div class="fade-up" style="max-width:500px; margin:0 auto 24px;">
+    <div class="pricing-card featured" style="padding:40px;">
+      <div class="pricing-badge">One-Time Investment</div>
+      <p class="price-strike" style="margin-top:8px;">$31,500</p>
+      <p class="price-big text-accent" style="font-size:64px;">$5,997</p>
+      <p style="font-size:15px; color:var(--text-secondary); margin-bottom:24px;">One-time payment. You own everything we build.</p>
+      <div style="border-top:1px solid var(--card-border); padding-top:20px; text-align:left;">
+        <ul class="check-list" style="font-size:14px; line-height:1.9;">
+          <li>All 3 pillars built and running</li>
+          <li>10,000+ signal-qualified leads</li>
+          <li>25 domains, 50 inboxes, AI agents</li>
+          <li>Client wiki with all SOPs</li>
+          <li>Pipeline dashboard</li>
+          <li>Podcast production included</li>
+          <li>10+ qualified conversations guaranteed</li>
+          <li>You own the entire engine permanently</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-green card-sm fade-up mb-16" style="padding:24px; max-width:500px; margin:0 auto;">
+    <p style="font-size:15px; line-height:1.7;"><strong>Risk Reversal:</strong> If we do not hit 10 qualified conversations in 45 days, we keep working for free for up to another 45 days. You pay once. The downside is capped at $5,997. The upside is a permanently installed growth engine.</p>
+  </div>
+
+  <div class="card card-sm fade-up" style="padding:16px; max-width:500px; margin:0 auto;">
+    <p style="font-size:14px; color:var(--text-secondary); text-align:center;"><strong style="color:var(--text);">After Day 45:</strong> Optional $3,000/month retainer if you want us to keep running and optimizing the engine. No lock-in. You can run it yourself with the wiki and SOPs we built.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17: ROI CALCULATOR -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="17">
+<div class="slide-inner text-center">
+  <p class="eyebrow fade-up">The Math</p>
+  <h2 class="fade-up mb-8">Return on <span class="text-accent">Investment</span></h2>
+  <p class="subtitle fade-up mb-28">Using the numbers you gave us on March 24</p>
+
+  <div class="grid-3 fade-up mb-28">
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-accent" style="font-size:36px;">$80K</p>
+      <p class="label">Your Client Value (NZD/yr)</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-amber" style="font-size:36px;">2 Years</p>
+      <p class="label">Your Retention ($160K LTV)</p>
+    </div>
+    <div class="card card-sm stat" style="padding:20px;">
+      <p class="num text-green" style="font-size:36px;">1 in 3</p>
+      <p class="label">Your Close Rate (33%)</p>
+    </div>
+  </div>
+
+  <div class="grid-3 fade-up mb-24" style="align-items:stretch;">
+    <div class="card card-sm" style="padding:24px; border-top:3px solid var(--red);">
+      <p style="font-size:11px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Tier 1: Worst Case</p>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">Close 1 out of 10 (10% - way below your actual rate)</p>
+      <p style="font-size:14px; margin-bottom:4px;">1 client x $80K = <strong class="text-green">$80K first-year</strong></p>
+      <p style="font-size:32px; font-weight:700; color:var(--green); margin:8px 0;">13x ROI</p>
+      <p style="font-size:13px; color:var(--text-secondary);">LTV: $160K = 27x</p>
+    </div>
+    <div class="card card-sm" style="padding:24px; border-top:3px solid var(--amber);">
+      <p style="font-size:11px; font-weight:700; color:var(--amber); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Tier 2: Conservative</p>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">Close 2 out of 10 (20%)</p>
+      <p style="font-size:14px; margin-bottom:4px;">2 clients x $80K = <strong class="text-green">$160K first-year</strong></p>
+      <p style="font-size:32px; font-weight:700; color:var(--green); margin:8px 0;">27x ROI</p>
+      <p style="font-size:13px; color:var(--text-secondary);">LTV: $320K = 53x</p>
+    </div>
+    <div class="card card-sm" style="padding:24px; border-top:3px solid var(--green);">
+      <p style="font-size:11px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Tier 3: At Your Rate</p>
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:12px;">Close 3 out of 10 (33% - your actual rate)</p>
+      <p style="font-size:14px; margin-bottom:4px;">3 clients x $80K = <strong class="text-green">$240K first-year</strong></p>
+      <p style="font-size:32px; font-weight:700; color:var(--green); margin:8px 0;">40x ROI</p>
+      <p style="font-size:13px; color:var(--text-secondary);">LTV: $480K = 80x</p>
+    </div>
+  </div>
+
+  <div class="card card-green card-sm fade-up" style="padding:20px;">
+    <p style="font-size:17px;"><strong>Close just one client and the entire investment is paid for 13 times over.</strong> At your actual close rate, it is 40x.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18: WORST CASE SCENARIO -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="18">
+<div class="slide-inner">
+  <p class="eyebrow fade-up" style="color:var(--amber);">Absolute Worst Case</p>
+  <h2 class="fade-up mb-8">Even If <span class="text-amber">Everything Goes Wrong</span></h2>
+  <p class="subtitle fade-up mb-28">Let's say the campaigns underperform. Let's say the close rate is half what you told us. Here is what you still walk away with.</p>
+
+  <div class="grid-2 fade-up mb-24" style="align-items:stretch;">
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-top:3px solid var(--accent);">
+      <p style="font-size:32px; margin-bottom:12px;">&#x1F4E7;</p>
+      <h4 class="mb-8">A Growth Engine</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; flex:1;">25 domains, 50 inboxes, proven sequences, AI agents. Infrastructure that keeps producing leads indefinitely.</p>
+    </div>
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-top:3px solid var(--green);">
+      <p style="font-size:32px; margin-bottom:12px;">&#x1F3AC;</p>
+      <h4 class="mb-8">Thought Leadership Content</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; flex:1;">Podcast episodes, LinkedIn clips, authority-building content that positions CFO Centre as NZ's fractional CFO leader.</p>
+    </div>
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-top:3px solid var(--blue);">
+      <p style="font-size:32px; margin-bottom:12px;">&#x1F4CB;</p>
+      <h4 class="mb-8">10,000+ Leads</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; flex:1;">Signal-scored, verified NZ prospects in your pipeline. Ready to work. Yours permanently.</p>
+    </div>
+    <div class="card card-sm" style="display:flex; flex-direction:column; border-top:3px solid var(--amber);">
+      <p style="font-size:32px; margin-bottom:12px;">&#x1F4DA;</p>
+      <h4 class="mb-8">SOPs & Documentation</h4>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; flex:1;">Complete wiki with every script, template, sequence, and playbook. Your team can run and iterate on the system forever.</p>
+    </div>
+  </div>
+
+  <div class="card card-amber card-sm fade-up text-center" style="padding:20px;">
+    <p style="font-size:16px;">Even if you spend the next 12 months figuring it out on your own and close just one deal from this pipeline, the entire investment is worth it.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19: BRUNSON CLOSE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="19">
+<div class="slide-inner text-center">
+  <h2 class="fade-up mb-32">If All This Did Was...</h2>
+
+  <div style="display:flex; flex-direction:column; gap:16px; max-width:740px; margin:0 auto;">
+    <div class="quote-card fade-up" style="text-align:left;">
+      <p style="font-size:19px;">If all this did was bring you one more client this year - that is $80,000 in revenue from a $5,997 investment. Would it be worth it?</p>
+    </div>
+
+    <div class="quote-card fade-up" style="text-align:left;">
+      <p style="font-size:19px;">If all this did was build the referral network that your best Australian regions have been building for years - but in 45 days instead of 5 years. Would it be worth it?</p>
+    </div>
+
+    <div class="quote-card fade-up" style="text-align:left;">
+      <p style="font-size:19px;">If all this did was give your 10 CFOs confidence that the business is investing in their pipeline and stop them from looking elsewhere. Would it be worth it?</p>
+    </div>
+
+    <div class="quote-card fade-up" style="text-align:left;">
+      <p style="font-size:19px;">If all this did was put CFO Centre on the map as the AI-ready fractional CFO firm in New Zealand before any competitor claims that position. Would it be worth it?</p>
+    </div>
+  </div>
+
+  <p class="fade-up muted mt-20" style="font-size:15px;">It does all of this. And more.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20: NEXT STEPS / TIMELINE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="20">
+<div class="slide-inner">
+  <p class="eyebrow fade-up">Next Steps</p>
+  <h2 class="fade-up mb-8">The 45-Day <span class="text-accent">Timeline</span></h2>
+  <p class="subtitle fade-up mb-32">Here is exactly what happens after you say yes.</p>
+
+  <div style="display:flex; flex-direction:column; gap:16px;">
+    <div class="card fade-up" style="border-left:4px solid var(--accent); padding:24px 28px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:10px;">
+        <span class="roadmap-month" style="color:var(--accent);">Days 1-2</span>
+        <h4 style="font-size:18px;">&#x26A1; Instant Action</h4>
+      </div>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6;">Contract signed. 25 domains purchased, warm-up starts same day. LinkedIn campaigns queued. First connection requests from Richard's profile go out. You see activity immediately.</p>
+    </div>
+
+    <div class="card fade-up" style="border-left:4px solid var(--accent); padding:24px 28px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:10px;">
+        <span class="roadmap-month" style="color:var(--accent);">Days 3-7</span>
+        <h4 style="font-size:18px;">&#x1F3D7;&#xFE0F; Strategy & Build</h4>
+      </div>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6;">90-minute ICP strategy session with Jordan. Laura approves brand-aligned copy templates. Lead scraping begins. 10,000 leads sourced, enriched, verified, scored.</p>
+    </div>
+
+    <div class="card fade-up" style="border-left:4px solid var(--amber); padding:24px 28px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:10px;">
+        <span class="roadmap-month" style="color:var(--amber);">Day 14</span>
+        <h4 style="font-size:18px;">&#x1F4E8; Email Goes Live</h4>
+      </div>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6;">Email infrastructure warmed and ready. All three campaigns running: podcast invites, workshop invites, VIP manual outreach. LinkedIn already producing conversations.</p>
+    </div>
+
+    <div class="card fade-up" style="border-left:4px solid var(--green); padding:24px 28px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:10px;">
+        <span class="roadmap-month" style="color:var(--green);">Days 14-40</span>
+        <h4 style="font-size:18px;">&#x1F4C8; Scale & Optimize</h4>
+      </div>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6;">All leads in sequences. First podcast/workshop sessions happening. VIP dossiers built and presented to Richard weekly. Wiki and dashboard being built. Copy library compounding from performance data.</p>
+    </div>
+
+    <div class="card fade-up" style="border-left:4px solid var(--green); padding:24px 28px;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:10px;">
+        <span class="roadmap-month" style="color:var(--green);">Day 45</span>
+        <h4 style="font-size:18px;">&#x1F3C1; Handover</h4>
+      </div>
+      <p style="font-size:15px; color:var(--text-secondary); line-height:1.6;">90-minute results review call. Wiki and dashboard walkthrough. Two options: full handover (your team runs it with the documentation) or retainer ($3,000/month - we keep running and optimizing). You own everything either way.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21: SUMMARY + FAQ -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="21">
+<div class="slide-inner">
+  <div class="text-center fade-up mb-24">
+    <img src="assets/dd-logo-white.png" alt="Dopamine Digital" style="width:48px; margin:0 auto 20px; display:block; opacity:0.7;">
+    <h2 style="font-size:40px; margin-bottom:16px;">CFO Centre NZ <span class="text-accent">Growth Engine</span></h2>
+  </div>
+
+  <div class="grid-2 fade-up mb-24" style="align-items:stretch;">
+    <div class="card card-sm" style="padding:24px;">
+      <h4 class="mb-12" style="font-size:17px;">What You Get</h4>
+      <ul class="check-list" style="font-size:14px; line-height:1.9;">
+        <li>3 custom outreach campaigns (podcast, workshop, VIP)</li>
+        <li>10,000+ signal-qualified NZ leads</li>
+        <li>25 domains, 50 inboxes, AI reply agents</li>
+        <li>LinkedIn outreach via HeyReach</li>
+        <li>Pipeline dashboard + weekly ops calls</li>
+        <li>Podcast production + LinkedIn content</li>
+        <li>Complete wiki with all SOPs</li>
+        <li>You own the entire engine permanently</li>
+      </ul>
+    </div>
+    <div class="card card-violet card-sm" style="padding:24px;">
+      <h4 class="mb-12" style="font-size:17px;">The Numbers</h4>
+      <div class="value-line"><span>Total Value</span><span style="font-weight:700; text-decoration:line-through; color:var(--text-secondary);">$31,500</span></div>
+      <div class="value-line"><span>Your Investment</span><span style="font-weight:700; color:var(--accent); font-size:20px;">$5,997</span></div>
+      <div class="value-line"><span>Conversations Guaranteed</span><span style="font-weight:700; color:var(--green);">10+</span></div>
+      <div class="value-line"><span>Install Time</span><span style="font-weight:700;">45 Days</span></div>
+      <div class="value-line"><span>Ownership</span><span style="font-weight:700; color:var(--green);">100% Yours</span></div>
+      <div class="value-line"><span>Optional Retainer</span><span style="font-weight:700;">$3,000/mo</span></div>
+    </div>
+  </div>
+
+  <div class="card card-green card-sm fade-up mb-24 text-center" style="padding:20px;">
+    <p style="font-size:17px;"><strong>10+ qualified conversations in 45 days or we keep working free.</strong></p>
+  </div>
+
+  <h4 class="fade-up mb-16 text-center" style="font-size:18px; color:var(--text-secondary);">Common Questions</h4>
+
+  <details class="faq-item fade-up">
+    <summary>What if cold outreach has not worked before?</summary>
+    <div class="faq-body">Your old campaigns sent the same pitch to everyone. We use signal-based targeting with three different approaches based on awareness level. Hot prospects get direct offers. Problem-aware leads get workshops. Unaware prospects get podcast invites. Different message, different channel, different result.</div>
+  </details>
+
+  <details class="faq-item fade-up">
+    <summary>How much of our time does this require?</summary>
+    <div class="faq-body">Laura approves messaging templates once before launch. Richard takes meetings when qualified prospects are ready. Weekly 30-minute check-in with Jordan. We handle everything else: lead sourcing, outreach, replies, booking, follow-up.</div>
+  </details>
+
+  <details class="faq-item fade-up">
+    <summary>Does this align with CFO Centre's global brand?</summary>
+    <div class="faq-body">Everything goes through Laura before launch. We send the messaging templates, she approves or adjusts, nothing goes out without sign-off. This sits alongside your digital agency and the coming global shared services model. It complements global marketing - it does not compete with it.</div>
+  </details>
+
+  <details class="faq-item fade-up">
+    <summary>What happens after 45 days?</summary>
+    <div class="faq-body">You own everything: domains, lead lists, sequences, wiki, prompts, dashboard. Option 1: full handover, your team runs it with the documentation. Option 2: $3,000/month retainer, we keep running and optimizing. Nothing is locked behind our platform.</div>
+  </details>
+
+  <details class="faq-item fade-up">
+    <summary>What if we do not hit 10 conversations?</summary>
+    <div class="faq-body">We keep working for free for up to another 45 days until we hit the target. The risk is entirely on us. You pay once. The downside is capped at $5,997.</div>
+  </details>
+
+  <p class="fade-up text-center mt-20 muted" style="font-size:13px;">Prepared by Dopamine Digital &middot; dopaminedigital.io</p>
+</div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- Navigation -->
+<div class="nav-bar" id="navBar"></div>
+<div class="nav-counter" id="navCounter">1 / 21</div>
+<button id="themeBtn" onclick="toggleTheme()" style="position:fixed;top:16px;right:20px;z-index:200;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;font-family:inherit;transition:all .2s;backdrop-filter:blur(8px);">&#x2600; Light</button>
+
+<script>
+(function() {
+  var deck = document.getElementById('deck');
+  var slides = deck.querySelectorAll('.slide');
+  var navBar = document.getElementById('navBar');
+  var navCounter = document.getElementById('navCounter');
+  var totalSlides = slides.length;
+  var currentSlide = 1;
+
+  for (var i = 1; i <= totalSlides; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+    dot.setAttribute('data-slide', i);
+    (function(n) {
+      dot.addEventListener('click', function() { goToSlide(n); });
+    })(i);
+    navBar.appendChild(dot);
+  }
+
+  function goToSlide(n) {
+    if (n < 1 || n > totalSlides) return;
+    slides.forEach(function(s) { s.classList.remove('active'); });
+    slides[n - 1].classList.add('active');
+    slides[n - 1].scrollTop = 0;
+    navBar.querySelectorAll('.nav-dot').forEach(function(d) { d.classList.remove('active'); });
+    navBar.querySelector('[data-slide="' + n + '"]').classList.add('active');
+    navCounter.textContent = n + ' / ' + totalSlides;
+    currentSlide = n;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); goToSlide(currentSlide + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goToSlide(currentSlide - 1); }
+  });
+
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) { diff > 0 ? goToSlide(currentSlide + 1) : goToSlide(currentSlide - 1); }
+  }, { passive: true });
+})();
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  var isLight = html.getAttribute('data-theme') === 'light';
+  html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  btn.innerHTML = isLight ? '&#x2600; Light' : '&#x1F319; Dark';
+  btn.style.background = isLight ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)';
+  btn.style.borderColor = isLight ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)';
+  localStorage.setItem('cfoc-theme', isLight ? 'dark' : 'light');
+}
+(function() {
+  var t = localStorage.getItem('cfoc-theme');
+  if (t) {
+    document.documentElement.setAttribute('data-theme', t);
+    var btn = document.getElementById('themeBtn');
+    if (btn) {
+      btn.innerHTML = t === 'light' ? '&#x1F319; Dark' : '&#x2600; Light';
+      if (t === 'light') { btn.style.background = 'rgba(0,0,0,0.06)'; btn.style.borderColor = 'rgba(0,0,0,0.12)'; }
+    }
+  }
+})();
+</script>
+</body>
+</html>
